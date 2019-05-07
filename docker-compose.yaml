@@ -1,0 +1,22 @@
+version: "2.2"
+
+services: 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks: 
+      demo:
+  app:
+    image: greggu/django-redis:0.1
+    container_name: app
+    build: 
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8000:8000"
+    networks: 
+      demo:
+    restart: always
+
+networks: 
+  demo:
